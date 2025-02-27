@@ -10,4 +10,6 @@ public class WarApplication {
 		SpringApplication.run(WarApplication.class, args);
 	}
 
+
+
 }
