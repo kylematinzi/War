@@ -20,10 +20,14 @@ public class Game {
     private boolean playerOneWin = false; // True if player one is the winner
     private boolean playerTwoWin = false; // True if player two is the winner
     private String winner = ""; // Winners name
+    private Card lastPlayerOneCard;
+    private Card lastPlayerTwoCard;
+    private String lastResult;
 
     /**
      * Constructor. This method asks for two player names, will initialize the players, and deal the deck between the
      * two calling the dealCards method. Player names may be what ever characters a person decides.
+     *
      * @param playerOneName - Player ones name
      * @param playerTwoName - Player twos name
      */
@@ -121,6 +125,7 @@ public class Game {
      * each player and compares them one by one to see who has the higher card. Whoever has the higher card wins and
      * receives all 4 cards from the opposing player. If all cards are equal goToWar is called recursively to run
      * another round of war. If at any time a player does not have enough cards to continue they lose.
+     *
      * @param cardsInPlay - list of cards currently in play.
      */
     private void goToWar(ArrayList<Card> cardsInPlay) {
@@ -172,7 +177,8 @@ public class Game {
 
     /**
      * Method picks up the players stack of cards they have won in previous rounds from the other player.
-     * @param hand - Current hand of the selected player
+     *
+     * @param hand  - Current hand of the selected player
      * @param stack - Current stack of the selected player
      */
     private void grabStack(ArrayList<Card> hand, ArrayList<Card> stack) {
@@ -195,4 +201,34 @@ public class Game {
         }
         System.out.println(winner);
     }
+
+    public RoundResult playSingleRound() {
+        if (playerOneWin || playerTwoWin) {
+            return new RoundResult(
+                    lastPlayerOneCard.toString(),
+                    lastPlayerTwoCard.toString(),
+                    lastResult,
+                    true,
+                    winner
+            );
+        }
+        return null;// place holder
+    }
+
+    public static class RoundResult {
+        public String playerOneCard;
+        public String playerTwoCard;
+        public String result;
+        public String winner;
+        public boolean gameOver;
+
+        public RoundResult(String playerOneCard, String playerTwoCard, String result, boolean gameOver, String winner) {
+            this.playerOneCard = playerOneCard;
+            this.playerTwoCard = playerTwoCard;
+            this.result = result;
+            this.gameOver = gameOver;
+            this.winner = winner;
+        }
+    }
+
 }

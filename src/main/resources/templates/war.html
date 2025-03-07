@@ -3,14 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>The Game of War</title>
+    <script src ="https://code.jquery.com/jquery-3.6.0.minjs"> // Loads JQuery
+    </script>
 </head>
 <body style="background-color: #2C2F33">
     <div style="display: flex; flex-direction: column; align-items: center; height: 50vh;">
         <h1 style = "font-size: 100px; font-family: 'Arial Black',serif">War!</h1>
-        <div style="display: flex; justify-content: center; align-items: center; height: 80vh;">
-            <img src="/CardImages/ace_of_spades.png" alt="Ace of Clubs" style="width: 250px; margin: 10px;">
-            <img src="/CardImages/ace_of_hearts.png" alt="Ace of Hearts" style="width: 250px; margin: 10px;">
+        <div id="game-area" style="display: flex; justify-content: center; align-items: center; height: 80vh;">
+            <div id="playerOneCard">
+                <img id="playerOneCardImg" src="/CardImages/ace_of_spades.png" alt="playerOneCard" style="width: 250px; margin: 10px;">
+            </div>
+            <div id="playerTwoCard">
+                <img id="playerTwoCardImg" src="/CardImages/ace_of_hearts.png" alt="playerTwoCard" style="width: 250px; margin: 10px;">
+            </div>
         </div>
+        <div id="result" style="font-size: 24px; color: white"></div>
+        <button id="playButton" style="font-size: 20px; padding: 10px 20px; margin-top: 20px;">Play next Round</button>
     </div>
+
+    <script>
+        $(document).ready(function (){
+            $("#playButton").click(function (){
+                $.get("/playRound", function (data){ // update the card images
+                    $("#playerOneCardImg").attr("src","/CardImages/" + data.playerOneCard + ".png");
+                    $("#playerTwoCardImg").attr("src","/CardImages/" + data.playerTwoCard + ".png");
+                    // Display result
+                    $("#result").text(data.result);
+                    // See if the game is over
+                    if(data.gameOver){
+                        $("#playButton").prop("disabled", true);
+                        $("#result").text(data.result + "Game Over!" + data.winner + " wins!")
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

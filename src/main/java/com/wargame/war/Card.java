@@ -6,7 +6,7 @@ package com.wargame.war;
 public class Card {
     private final String suit;
     private final int value;
-    String CardDetails ;
+    private final String rank;
 
     /**
      * Card constructor
@@ -16,6 +16,23 @@ public class Card {
     public Card(String suit, int value) {
         this.suit = suit;
         this.value = value;
+        this.rank = getRankFromValue(value);
+    }
+
+    /**
+     * Method converts the value of the face cards to a readable string. Ace through Jack.
+     * @param value - numeric value of given face card
+     * @return - readable string of the rank
+     */
+    private String getRankFromValue(int value) {
+        return switch (value) {
+            // enhanced switch vs traditional switch. Takes numeric value and moves to string name
+            case 14 -> "ace";
+            case 13 -> "king";
+            case 12 -> "queen";
+            case 11 -> "jack";
+            default -> String.valueOf(value); // default will return cards that already have their numbers 2-10
+        };
     }
 
     /**
@@ -33,9 +50,21 @@ public class Card {
     }
 
     /**
-     * @return - card's suit and value.
+     * Will return a string that matches the cards filename format. Card files are labeled as "ace_of_spades".
+     * All lowercase.
+     * @return -
      */
+    @Override
     public String toString() {
-        return CardDetails = suit + " " + value;
+        return rank + "_of_" + suit.toLowerCase();
+    }
+
+    /**
+     * Will return a readable version of a card.
+     * @return - User readable card description.
+     */
+    public String toReadableString() {
+        String readableRank = rank.substring(0, 1).toUpperCase() + rank.substring(1);
+        return readableRank+" of " + suit;
     }
 }
