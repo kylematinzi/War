@@ -59,66 +59,66 @@ public class Game {
      * cleared. playRound is called to start comparing the cards of each player. CheckWinner will be called when either
      * playerOneWin or playerTwoWin is true.
      */
-    public void playGame() {
-        while (!playerOneWin && !playerTwoWin) {
-            // Check if hands are empty and need to pick up the stack.
-            if (currentHandOne.isEmpty()) {
-                if (stackOne.isEmpty()) {
-                    playerTwoWin = true;
-                    break;
-                }
-                // add the stack to player hand. Clear the stack.
-                currentHandOne.addAll(stackOne);
-                Collections.shuffle(currentHandOne);
-                stackOne.clear();
-            }
-            if (currentHandTwo.isEmpty()) {
-                if (stackTwo.isEmpty()) {
-                    playerOneWin = true;
-                    break;
-                }
-                // add the stack to player hand. Clear the stack.
-                currentHandTwo.addAll(stackTwo);
-                Collections.shuffle(currentHandTwo);
-                stackTwo.clear();
-            }
-            playRound();
-        }
-        // See who the winner is.
-        checkWinner();
-    }
+//    public void playGame() {
+//        while (!playerOneWin && !playerTwoWin) {
+//            // Check if hands are empty and need to pick up the stack.
+//            if (currentHandOne.isEmpty()) {
+//                if (stackOne.isEmpty()) {
+//                    playerTwoWin = true;
+//                    break;
+//                }
+//                // add the stack to player hand. Clear the stack.
+//                currentHandOne.addAll(stackOne);
+//                Collections.shuffle(currentHandOne);
+//                stackOne.clear();
+//            }
+//            if (currentHandTwo.isEmpty()) {
+//                if (stackTwo.isEmpty()) {
+//                    playerOneWin = true;
+//                    break;
+//                }
+//                // add the stack to player hand. Clear the stack.
+//                currentHandTwo.addAll(stackTwo);
+//                Collections.shuffle(currentHandTwo);
+//                stackTwo.clear();
+//            }
+//            playRound();
+//        }
+//        // See who the winner is.
+//        checkWinner();
+//    }
 
     /**
      * Method plays a round of war. Each round consists of comparing one of player one's cards vs one of player two's
      * cards. Whosoever card is of higher value wins and collects the other players card. If cards are equal the
      * gotToWar method will be called.
      */
-    private void playRound() {
-        // Get the first card from each player's hand.
-        // Remove the card from the player's hand.
-        Card cardOne = currentHandOne.remove(0);
-        Card cardTwo = currentHandTwo.remove(0);
-        // Add the card to a separate list to track which cards are in play.
-        ArrayList<Card> cardsInPlay = new ArrayList<>();
-        cardsInPlay.add(cardOne);
-        cardsInPlay.add(cardTwo);
-
-        System.out.println(playerOne.getName() + " plays " + cardOne + " vs " +
-                playerTwo.getName() + " plays " + cardTwo);
-
-        // Compare the cards
-        if (cardOne.getValue() > cardTwo.getValue()) {
-            stackOne.addAll(cardsInPlay);
-            System.out.println(playerOne.getName() + " wins the round");
-        } else if (cardTwo.getValue() > cardOne.getValue()) {
-            stackTwo.addAll(cardsInPlay);
-            System.out.println(playerTwo.getName() + " wins the round");
-        } else {
-            // If cards are equal go to war.
-            System.out.println("War!");
-            goToWar(cardsInPlay);
-        }
-    }
+//    private void playRound() {
+//        // Get the first card from each player's hand.
+//        // Remove the card from the player's hand.
+//        Card cardOne = currentHandOne.remove(0);
+//        Card cardTwo = currentHandTwo.remove(0);
+//        // Add the card to a separate list to track which cards are in play.
+//        ArrayList<Card> cardsInPlay = new ArrayList<>();
+//        cardsInPlay.add(cardOne);
+//        cardsInPlay.add(cardTwo);
+//
+//        System.out.println(playerOne.getName() + " plays " + cardOne + " vs " +
+//                playerTwo.getName() + " plays " + cardTwo);
+//
+//        // Compare the cards
+//        if (cardOne.getValue() > cardTwo.getValue()) {
+//            stackOne.addAll(cardsInPlay);
+//            System.out.println(playerOne.getName() + " wins the round");
+//        } else if (cardTwo.getValue() > cardOne.getValue()) {
+//            stackTwo.addAll(cardsInPlay);
+//            System.out.println(playerTwo.getName() + " wins the round");
+//        } else {
+//            // If cards are equal go to war.
+//            System.out.println("War!");
+//            goToWar(cardsInPlay);
+//        }
+//    }
 
     /**
      * Method used in the case that the players cards from playRound are evaluated to be equal. Pulls four cards from
@@ -193,14 +193,14 @@ public class Game {
     /**
      * Method will display who the winner of the game is based on the playerOneWin / playerTwoWin variables.
      */
-    private void checkWinner() {
-        if (playerOneWin) {
-            winner = "The winner is: " + playerOne.getName();
-        } else if (playerTwoWin) {
-            winner = "The winner is: " + playerTwo.getName();
-        }
-        System.out.println(winner);
-    }
+//    private void checkWinner() {
+//        if (playerOneWin) {
+//            winner = "The winner is: " + playerOne.getName();
+//        } else if (playerTwoWin) {
+//            winner = "The winner is: " + playerTwo.getName();
+//        }
+//        System.out.println(winner);
+//    }
 
     public RoundResult playSingleRound() {
         if (playerOneWin || playerTwoWin) {
@@ -212,9 +212,79 @@ public class Game {
                     winner
             );
         }
-        return null;// place holder
+
+        if(currentHandOne.isEmpty()) {
+            if (stackOne.isEmpty()) {
+                playerTwoWin = true;
+                winner = playerTwo.getName();
+                return new RoundResult(
+                        // Simpler way to write if else statement. Ternary operator.
+                        // Condition: lastPlayerOne card != null
+                        // ? = if true do this (if)
+                        // : = if false do this (else)
+                        lastPlayerOneCard != null ? lastPlayerOneCard.toString() : "none",
+                        lastPlayerTwoCard != null ? lastPlayerTwoCard.toString() : "none",
+                        playerTwo.getName() + " wins!",
+                        true,
+                        winner
+                );
+            }
+            grabStack(currentHandOne, stackOne);
+        }
+
+        if(currentHandTwo.isEmpty()) {
+            if (stackTwo.isEmpty()) {
+                playerOneWin = true;
+                winner = playerOne.getName();
+                return new RoundResult(
+                        lastPlayerOneCard != null ? lastPlayerOneCard.toString() : "none",
+                        lastPlayerTwoCard != null ? lastPlayerTwoCard.toString() : "none",
+                        playerOne.getName() + " wins!",
+                        true,
+                        winner
+                );
+            }
+            grabStack(currentHandTwo, stackTwo);
+        }
+
+        // play single round
+        Card cardOne = currentHandOne.remove(0);
+        Card cardTwo = currentHandTwo.remove(0);
+        ArrayList<Card> cardsInPlay = new ArrayList<>();
+        cardsInPlay.add(cardOne);
+        cardsInPlay.add(cardTwo);
+
+        String result;
+        if (cardOne.getValue() > cardTwo.getValue()) {
+            stackOne.addAll(cardsInPlay);
+            result = playerOne.getName() + " wins the round";
+        } else if (cardTwo.getValue() > cardOne.getValue()) {
+            stackTwo.addAll(cardsInPlay);
+            result = playerTwo.getName() + " wins the round";
+        } else {
+            result = "War!";
+            goToWar(cardsInPlay);
+            result = lastResult;
+        }
+
+        lastPlayerOneCard = cardOne;
+        lastPlayerTwoCard = cardTwo;
+        lastResult = result;
+
+        // display the result of the round played
+        return new RoundResult(
+                cardOne.toString(),
+                cardTwo.toString(),
+                result,
+                playerOneWin || playerTwoWin,
+                winner
+        );
     }
 
+    /**
+     * Nested class being used to display who the winner of a round is. This class puts together all the pertinent
+     * details of a single round.
+     */
     public static class RoundResult {
         public String playerOneCard;
         public String playerTwoCard;
@@ -222,6 +292,14 @@ public class Game {
         public String winner;
         public boolean gameOver;
 
+        /**
+         * Class constructor
+         * @param playerOneCard - Player one's card
+         * @param playerTwoCard - Player two's card
+         * @param result - Result of the round
+         * @param gameOver - Is game over True || False
+         * @param winner - Who wins the round
+         */
         public RoundResult(String playerOneCard, String playerTwoCard, String result, boolean gameOver, String winner) {
             this.playerOneCard = playerOneCard;
             this.playerTwoCard = playerTwoCard;
