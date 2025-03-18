@@ -15,17 +15,17 @@ public class Deck {
      * Method creates a deck by adding 14 of suits of each card to the deck.
      */
     public Deck() {
-        for(int x = 0; x < 14; x++) {
-            deck.add(new Card("Heart", x+1));
+        for(int x = 1; x < 14; x++) {
+            deck.add(new Card("Hearts", x+1));
         }
-        for(int x = 0; x < 14; x++) {
-            deck.add(new Card("Spade", x+1));
+        for(int x = 1; x < 14; x++) {
+            deck.add(new Card("Spades", x+1));
         }
-        for(int x = 0; x < 14; x++) {
-            deck.add(new Card("Diamond", x+1));
+        for(int x = 1; x < 14; x++) {
+            deck.add(new Card("Diamonds", x+1));
         }
-        for(int x = 0; x < 14; x++) {
-            deck.add(new Card("Club", x+1));
+        for(int x = 1; x < 14; x++) {
+            deck.add(new Card("Clubs", x+1));
         }
     }
 

@@ -25,6 +25,8 @@
         $(document).ready(function (){
             $("#playButton").click(function (){
                 $.get("/playRound", function (data){ // update the card images
+                    console.log("data.playeroneCard:", data.playerOneCard)
+                    console.log("full response", data);
                     $("#playerOneCardImg").attr("src","/CardImages/" + data.playerOneCard + ".png");
                     $("#playerTwoCardImg").attr("src","/CardImages/" + data.playerTwoCard + ".png");
                     // Display result

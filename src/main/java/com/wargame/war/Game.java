@@ -52,73 +52,9 @@ public class Game {
         }
     }
 
-    /**
-     * Method plays the game. As long as playerOneWin and PlayerTwoWin are false the game will continue. Checks to see
-     * if player's current hands are empty. If yes, the player adds their stack to their hand. If the players stack is
-     * empty along with their hand, they lose. If not empty the stack is added to the player's hand, and the stack is
-     * cleared. playRound is called to start comparing the cards of each player. CheckWinner will be called when either
-     * playerOneWin or playerTwoWin is true.
-     */
-//    public void playGame() {
-//        while (!playerOneWin && !playerTwoWin) {
-//            // Check if hands are empty and need to pick up the stack.
-//            if (currentHandOne.isEmpty()) {
-//                if (stackOne.isEmpty()) {
-//                    playerTwoWin = true;
-//                    break;
-//                }
-//                // add the stack to player hand. Clear the stack.
-//                currentHandOne.addAll(stackOne);
-//                Collections.shuffle(currentHandOne);
-//                stackOne.clear();
-//            }
-//            if (currentHandTwo.isEmpty()) {
-//                if (stackTwo.isEmpty()) {
-//                    playerOneWin = true;
-//                    break;
-//                }
-//                // add the stack to player hand. Clear the stack.
-//                currentHandTwo.addAll(stackTwo);
-//                Collections.shuffle(currentHandTwo);
-//                stackTwo.clear();
-//            }
-//            playRound();
-//        }
-//        // See who the winner is.
-//        checkWinner();
-//    }
 
-    /**
-     * Method plays a round of war. Each round consists of comparing one of player one's cards vs one of player two's
-     * cards. Whosoever card is of higher value wins and collects the other players card. If cards are equal the
-     * gotToWar method will be called.
-     */
-//    private void playRound() {
-//        // Get the first card from each player's hand.
-//        // Remove the card from the player's hand.
-//        Card cardOne = currentHandOne.remove(0);
-//        Card cardTwo = currentHandTwo.remove(0);
-//        // Add the card to a separate list to track which cards are in play.
-//        ArrayList<Card> cardsInPlay = new ArrayList<>();
-//        cardsInPlay.add(cardOne);
-//        cardsInPlay.add(cardTwo);
-//
-//        System.out.println(playerOne.getName() + " plays " + cardOne + " vs " +
-//                playerTwo.getName() + " plays " + cardTwo);
-//
-//        // Compare the cards
-//        if (cardOne.getValue() > cardTwo.getValue()) {
-//            stackOne.addAll(cardsInPlay);
-//            System.out.println(playerOne.getName() + " wins the round");
-//        } else if (cardTwo.getValue() > cardOne.getValue()) {
-//            stackTwo.addAll(cardsInPlay);
-//            System.out.println(playerTwo.getName() + " wins the round");
-//        } else {
-//            // If cards are equal go to war.
-//            System.out.println("War!");
-//            goToWar(cardsInPlay);
-//        }
-//    }
+
+
 
     /**
      * Method used in the case that the players cards from playRound are evaluated to be equal. Pulls four cards from
@@ -190,17 +126,7 @@ public class Game {
         stack.clear();
     }
 
-    /**
-     * Method will display who the winner of the game is based on the playerOneWin / playerTwoWin variables.
-     */
-//    private void checkWinner() {
-//        if (playerOneWin) {
-//            winner = "The winner is: " + playerOne.getName();
-//        } else if (playerTwoWin) {
-//            winner = "The winner is: " + playerTwo.getName();
-//        }
-//        System.out.println(winner);
-//    }
+
 
     public RoundResult playSingleRound() {
         if (playerOneWin || playerTwoWin) {
@@ -307,6 +233,13 @@ public class Game {
             this.gameOver = gameOver;
             this.winner = winner;
         }
+
+        // getters
+        public String getPlayerOneCard() {return playerOneCard;}
+        public String getPlayerTwoCard() {return playerTwoCard;}
+        public String getResult() {return result;}
+        public String getWinner() {return winner;}
+        public boolean isGameOver() {return gameOver;}
     }
 
 }
