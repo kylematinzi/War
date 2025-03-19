@@ -52,10 +52,6 @@ public class Game {
         }
     }
 
-
-
-
-
     /**
      * Method used in the case that the players cards from playRound are evaluated to be equal. Pulls four cards from
      * each player and compares them one by one to see who has the higher card. Whoever has the higher card wins and
@@ -127,7 +123,12 @@ public class Game {
     }
 
 
-
+    /**
+     * This will play one round of "war". It looks at each player's top card and compares them. The card that is of a
+     * higher value wins the round. In the case of a draw, the players go to war calling the "gotToWar" method. If a
+     * player runs out of cards to play the other player wins.
+     * @return - The result of the round.
+     */
     public RoundResult playSingleRound() {
         if (playerOneWin || playerTwoWin) {
             return new RoundResult(
@@ -233,13 +234,5 @@ public class Game {
             this.gameOver = gameOver;
             this.winner = winner;
         }
-
-        // getters
-        public String getPlayerOneCard() {return playerOneCard;}
-        public String getPlayerTwoCard() {return playerTwoCard;}
-        public String getResult() {return result;}
-        public String getWinner() {return winner;}
-        public boolean isGameOver() {return gameOver;}
     }
-
 }

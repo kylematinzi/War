@@ -9,7 +9,7 @@ import java.util.Collections;
  */
 public class Deck {
 
-    private ArrayList<Card> deck = new ArrayList<>();
+    private final ArrayList<Card> deck = new ArrayList<>();
 
     /**
      * Method creates a deck by adding 14 of suits of each card to the deck.
