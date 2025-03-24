@@ -14,7 +14,8 @@ and enforces standard 'War' rules seamlessly.
 - How to use a Ternary operator
 
 ## Example use cases
-Enhanced switch: 
+Enhanced switch:
+
  return switch (value) {
             // enhanced switch vs traditional switch. Takes numeric value and moves to string name
             case 14 -> "ace";
@@ -28,6 +29,7 @@ Breakdown:
 - Eliminates need for repetative break statements
 
 Ternary Operator:
+
 lastPlayerOneCard != null ? lastPlayerOneCard.toString() : "none"
 Breakdown: 
 - Condition = lastPlayerOneCard != null
