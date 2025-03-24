@@ -36,3 +36,11 @@ Breakdown:
 - ? = if true do this (if)
 - : = if false do this (else)
 
+## Room For Improvement
+- Display the war happening. As of now "war" is just run through the back end and the round winner is shown with both cards still being the same value.
+- The initial images are both aces. Should update with the back of a playing card. 
+- Add user input to allow the players to choose their names.
+- Add "Play again" button at the completion of each game. 
+- Keep track of each players amount of wins game vs game. 
+- Update the UI with better look.
+
